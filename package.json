@@ -1,6 +1,6 @@
 {
   "name": "react-snap-svg-ts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
@@ -33,20 +33,13 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "description": "Snap-SVG wrapper in Typescript React",
-  "main": "src/App.tsx",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "description": "Snap-SVG in Typescript React",
+  "main": "src/canvas/SnapCanvas.tsx",
   "repository": "https://github.com/JinkiJung/react-snap-svg-ts",
   "author": "Jinki Jung <your.jinki.jung@gmail.com>",
   "license": "MIT",
