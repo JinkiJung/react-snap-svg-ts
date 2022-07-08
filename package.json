@@ -1,6 +1,6 @@
 {
   "name": "react-snap-svg-ts",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
