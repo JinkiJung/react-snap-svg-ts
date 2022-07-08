@@ -1,18 +1,31 @@
 // Webpack uses this to work with directories
-const path = require('path');
+const path = require("path");
+const webpack = require("webpack");
+const TerserPlugin = require("terser-webpack-plugin");
+
+const PATHS = {
+  entryPoint: path.resolve(__dirname, 'src/index.tsx'),
+  bundles: path.resolve(__dirname, 'dist'),
+}
 
 // This is the main configuration object.
 // Here, you write different options and tell Webpack what to do
 module.exports = {
 
   // Path to your entry point. From this file Webpack will begin its work
-  entry: './src/canvas/SnapCanvas.tsx',
+  entry: {
+    'bundle': [PATHS.entryPoint],
+    'bundle.min': [PATHS.entryPoint]
+  },
   module: {
+    // Webpack doesn't understand TypeScript files and a loader is needed.
+    // `node_modules` folder is excluded in order to prevent problems with
+    // the library dependencies, as well as `__tests__` folders that
+    // contain the tests for the library
     rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
+      {test: /\.tsx?$/,
+      use: 'ts-loader',
+      exclude: /node_modules/,
       },
       { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] }
     ],
@@ -20,17 +33,18 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
+  devtool: 'source-map',
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
   // Path and filename of your result bundle.
   // Webpack will bundle all JavaScript into this file
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '',
-    filename: 'bundle.js'
+    path: PATHS.bundles,
+    filename: '[name].js',
+    libraryTarget: 'umd',
+    library: 'react-snap-svg-ts',
+    umdNamedDefine: true
   },
-
-  // Default mode for Webpack is production.
-  // Depending on mode Webpack will apply different things
-  // on the final bundle. For now, we don't need production's JavaScript 
-  // minifying and other things, so let's set mode to development
-  mode: 'development'
 };
