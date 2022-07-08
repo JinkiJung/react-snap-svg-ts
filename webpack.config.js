@@ -6,7 +6,7 @@ const path = require('path');
 module.exports = {
 
   // Path to your entry point. From this file Webpack will begin its work
-  entry: './src/App.tsx',
+  entry: './src/canvas/SnapCanvas.tsx',
   module: {
     rules: [
       {
